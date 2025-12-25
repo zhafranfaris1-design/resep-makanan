@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Buku Resep Masakan Indonesia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff8e7;
+            color: #333;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #ff6f3c;
+        }
+        .resep {
+            border: 1px solid #ffb166;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: #fff3e0;
+        }
+        .resep h3 {
+            margin: 0;
+            cursor: pointer;
+            color: #ff6f3c;
+        }
+        .detail {
+            display: none;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>📖 Buku Resep Masakan Indonesia</h1>
+
+<div id="daftarResep">
+    <!-- Resep akan muncul di sini -->
+</div>
+
+<script>
+// Daftar resep masakan Indonesia
+const resepList = [
+    {
+        nama: "Nasi Goreng",
+        bahan: [
+            "2 piring nasi putih",
+            "2 siung bawang putih",
+            "2 sdm kecap manis",
+            "1 sdt garam",
+            "1 butir telur"
+        ],
+        cara: "Tumis bawang putih, masukkan telur, aduk. Masukkan nasi dan kecap manis, aduk rata, beri garam, sajikan."
+    },
+    {
+        nama: "Sate Ayam",
+        bahan: [
+            "500 gr daging ayam potong dadu",
+            "Tusuk sate",
+            "Bumbu kacang siap pakai"
+        ],
+        cara: "Tusuk ayam, panggang di atas arang, sajikan dengan saus kacang."
+    },
+    {
+        nama: "Gado-Gado",
+        bahan: [
+            "Sayuran rebus (kentang, kacang panjang, tauge)",
+            "Tahu dan tempe goreng",
+            "Saus kacang"
+        ],
+        cara: "Susun sayuran dan tahu tempe, siram dengan saus kacang, sajikan."
+    },
+    {
+        nama: "Mie Ayam",
+        bahan: [
+            "200 gr mie telur",
+            "100 gr ayam cincang",
+            "Bawang putih, garam, kecap manis",
+            "Daun bawang untuk taburan"
+        ],
+        cara: "Tumis bawang putih dan ayam cincang, beri garam dan kecap manis. Rebus mie, tuang ayam di atasnya, taburi daun bawang."
+    },
+    {
+        nama: "Martabak",
+        bahan: [
+            "200 gr tepung terigu",
+            "2 butir telur",
+            "200 ml susu",
+            "Coklat atau keju sesuai selera"
+        ],
+        cara: "Buat adonan tepung, tuang di wajan panas, beri isi coklat/keju, lipat, goreng hingga matang."
+    },
+    {
+        nama: "Soto",
+        bahan: [
+            "200 gr daging ayam",
+            "Bumbu soto instan",
+            "Sayuran (daun bawang, seledri, tauge)",
+            "Lontong atau nasi"
+        ],
+        cara: "Rebus ayam dengan bumbu soto, masukkan sayuran, sajikan dengan nasi atau lontong."
+    }
+];
+
+// Menampilkan daftar resep
+const daftarResepDiv = document.getElementById('daftarResep');
+
+resepList.forEach((resep, index) => {
+    const resepDiv = document.createElement('div');
+    resepDiv.classList.add('resep');
+
+    // Judul resep
+    const judul = document.createElement('h3');
+    judul.textContent = resep.nama;
+    judul.addEventListener('click', () => {
+        const detail = document.getElementById(`detail-${index}`);
+        detail.style.display = detail.style.display === 'none' ? 'block' : 'none';
+    });
+    resepDiv.appendChild(judul);
+
+    // Detail resep (bahan dan cara)
+    const detailDiv = document.createElement('div');
+    detailDiv.classList.add('detail');
+    detailDiv.id = `detail-${index}`;
+
+    const bahanList = document.createElement('ul');
+    resep.bahan.forEach(bahan => {
+        const li = document.createElement('li');
+        li.textContent = bahan;
+        bahanList.appendChild(li);
+    });
+
+    const caraP = document.createElement('p');
+    caraP.innerHTML = `<strong>Cara membuat:</strong> ${resep.cara}`;
+
+    detailDiv.appendChild(bahanList);
+    detailDiv.appendChild(caraP);
+
+    resepDiv.appendChild(detailDiv);
+    daftarResepDiv.appendChild(resepDiv);
+});
+</script>
+
+</body>
+</html>
